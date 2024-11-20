@@ -21,26 +21,17 @@ public:
 
     //constr cu parametri
     Autobuz(int capacitate, int nrPersoaneImbarcate, const char* producator) : idAutobuz(nrAutobuze++) {
-        if (capacitate > 0) {
-            this->capacitate = capacitate;
-        } else {
-            this->capacitate = 0;
-        }
-        if (nrPersoaneImbarcate >= 0 && nrPersoaneImbarcate <= capacitate) {
-            this->nrPersoaneImbarcate = nrPersoaneImbarcate;
-        } else {
-            this->nrPersoaneImbarcate = 0;
-        }
+       this->capacitate = (capacitate > 0) ? capacitate : 0;
+        this->nrPersoaneImbarcate = (nrPersoaneImbarcate >= 0 && nrPersoaneImbarcate <= capacitate) ? nrPersoaneImbarcate : 0;
         this->producator = new char[strlen(producator) + 1];
-        strcpy_s(this->producator, strlen(producator)+1, producator) ;
+        strcpy_s(this->producator, strlen(producator) + 1, producator);
     }
 
     //Destructor 
     ~Autobuz() {
-        if (producator) {
             delete[] producator;
         }
-    }
+    
 
     // Copy constructor
     Autobuz(const Autobuz& a) : idAutobuz(nrAutobuze++) {
@@ -53,13 +44,11 @@ public:
     //operator = pt atribuire
     Autobuz& operator=(const Autobuz& a) {
         if (this != &a) {
-            this->capacitate = a.capacitate;
-            this->nrPersoaneImbarcate = a.nrPersoaneImbarcate;
-            if (this->producator) {
-                delete[] this->producator;
-            }
-            this->producator = new char[strlen(a.producator) + 1];
-            strcpy_s(this->producator,strlen( a.producator)+1, a.producator) ;
+            capacitate = a.capacitate;
+            nrPersoaneImbarcate = a.nrPersoaneImbarcate;
+                delete[]producator;
+            producator = new char[strlen(a.producator) + 1];
+            strcpy_s(producator,strlen( a.producator)+1, a.producator) ;
         }
         return *this;
     }
